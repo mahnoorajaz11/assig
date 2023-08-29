@@ -1,3 +1,6 @@
+<?php
+include("conection.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -182,6 +185,23 @@
            </tr>
              <?php
            }
+           $query=$pdo->prepare("insert into marksheet(name,urdu,english,math,islamiat,pakistanstudies,obtained,total,percentage,grade,remarks)values(:pname,:purdu,:penglish,:pmath,:pislamiat,:ppakistanstudies,:pobt,:ptotal,:pper,:pgrade,:premarks) ");
+           $query->blindParam("pname",$name);
+           $query->blindParam("purdu",$urdu);
+           $query->blindParam("penglish",$english);
+           $query->blindParam("pmath",$math);
+           $query->blindParam("pislamiat",$islamiat);
+           $query->blindParam("ppakistanstudies",$pakistanstudies);
+           $query->blindParam("pobt",$obtained);
+           $query->blindParam("ptotal",$total);
+           $query->blindParam("pper",$percentage);
+           $query->blindParam("pgrade",$grade);
+           $query->blindParam("premarks",$remarks);
+           $query->execute();
+           echo"<script>
+           alert('data has send successfully');
+           location.assign('viewresult.php');
+           </script>"
         }
         ?>
 
