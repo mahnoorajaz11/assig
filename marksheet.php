@@ -1,5 +1,5 @@
 <?php
-include("conection.php");
+include("connection.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +43,7 @@ include("conection.php");
    </form>
    </div>
    <div class="container">
-    <table class="table">
+    <table border="1">
  <thead>
     <tr>
         <th scope="col">name</th>
@@ -61,12 +61,12 @@ include("conection.php");
  </thead>
   <?php
   if(isset($_POST['getresult'])){
-    $name= $_post['name'];
-    $urdu= $_post['urdu'];
-    $english= $_post['english'];
-    $math= $_post['math'];
-    $islamiat= $_post['islamiat'];
-    $pakistanstudies= $_post['pakistanstudies'];
+    $name= $_POST['name'];
+    $urdu= $_POST['urdu'];
+    $english= $_POST['english'];
+    $math= $_POST['math'];
+    $islamiat= $_POST['islamiat'];
+    $pakistanstudies= $_POST['pakistanstudies'];
     $obtained= $urdu+$english+$math+$islamiat+$pakistanstudies;
     $total=500;
     $percentage=($obtained/$total)*100;
@@ -74,118 +74,31 @@ include("conection.php");
     if($percentage>90 && $percentage<=100){
         $grade="A+1";
         $remarks="EXCELLENT";
-        ?>
-        <tr>
-        <td><?php echo $name;?></td>
-        <td><?php echo $urdu;?></td>
-        <td><?php echo $english;?></td>
-        <td><?php echo $math;?></td>
-        <td><?php echo $islamiat;?></td>
-        <td><?php echo $pakistanstudies;?></td>
-        <td><?php echo $obtained;?></td>
-        <td><?php echo $total;?></td>
-        <td><?php echo $percentage;?></td>
-        <td><?php echo $grade;?></td>
-        <td><?php echo $remarks;?></td>
-       </tr>
-       <?php
         }
         elseif($percentage>80 && $percentage<=90){
             $grade="A+";
             $remarks="weldone";
-            ?>
-                <tr>
-                    <td><?php echo $name;?></td>
-                    <td><?php echo $urdu;?></td>
-                    <td><?php echo $english;?></td>
-                    <td><?php echo $math;?></td>
-                    <td><?php echo $islamiat;?></td>
-                    <td><?php echo $pakistanstudies;?></td>
-                    <td><?php echo $obtained;?></td>
-                    <td><?php echo $total;?></td>
-                    <td><?php echo $percentage;?></td>
-                    <td><?php echo $grade;?></td>
-                    <td><?php echo $remarks;?></td>
-                </tr>
-                <?php
            }
            elseif($percentage>60 && $percentage<=70){
             $grade="B";
             $remarks="GOOD";
-            ?>
-            <tr>
-            <td><?php echo $name;?></td>
-            <td><?php echo $urdu;?></td>
-            <td><?php echo $english;?></td>
-            <td><?php echo $math;?></td>
-            <td><?php echo $islamiat;?></td>
-            <td><?php echo $pakistanstudies;?></td>
-            <td><?php echo $obtained;?></td>
-            <td><?php echo $total;?></td>
-            <td><?php echo $percentage;?></td>
-            <td><?php echo $grade;?></td>
-            <td><?php echo $remarks;?></td>
-           </tr>
-             <?php
+            
            }
            elseif($percentage>50 && $percentage<=60){
             $grade="C";
             $remarks="BETTER";
-            ?>
-            <tr>
-            <td><?php echo $name;?></td>
-            <td><?php echo $urdu;?></td>
-            <td><?php echo $english;?></td>
-            <td><?php echo $math;?></td>
-            <td><?php echo $islamiat;?></td>
-            <td><?php echo $pakistanstudies;?></td>
-            <td><?php echo $obtained;?></td>
-            <td><?php echo $total;?></td>
-            <td><?php echo $percentage;?></td>
-            <td><?php echo $grade;?></td>
-            <td><?php echo $remarks;?></td>
-           </tr>
-             <?php
+           
            } 
            elseif($percentage>40 && $percentage<=50){
             $grade="D";
             $remarks="KEEP IT UP";
-            ?>
-            <tr>
-            <td><?php echo $name;?></td>
-            <td><?php echo $urdu;?></td>
-            <td><?php echo $english;?></td>
-            <td><?php echo $math;?></td>
-            <td><?php echo $islamiat;?></td>
-            <td><?php echo $pakistanstudies;?></td>
-            <td><?php echo $obtained;?></td>
-            <td><?php echo $total;?></td>
-            <td><?php echo $percentage;?></td>
-            <td><?php echo $grade;?></td>
-            <td><?php echo $remarks;?></td>
-           </tr>
-             <?php
+           
            }
            else{
             $grade="fail";
             $remarks="TRY AGAIN";
-            ?>
-            <tr>
-            <td><?php echo $name;?></td>
-            <td><?php echo $urdu;?></td>
-            <td><?php echo $english;?></td>
-            <td><?php echo $math;?></td>
-            <td><?php echo $islamiat;?></td>
-            <td><?php echo $pakistanstudies;?></td>
-            <td><?php echo $obtained;?></td>
-            <td><?php echo $total;?></td>
-            <td><?php echo $percentage;?></td>
-            <td><?php echo $grade;?></td>
-            <td><?php echo $remarks;?></td>
-           </tr>
-             <?php
            }
-           $query=$pdo->prepare("insert into marksheet(name,urdu,english,math,islamiat,pakistanstudies,obtained,total,percentage,grade,remarks)values(:pname,:purdu,:penglish,:pmath,:pislamiat,:ppakistanstudies,:pobt,:ptotal,:pper,:pgrade,:premarks) ");
+           $query=$pdo->prepare("insert into data(name,urdu,english,math,islamiat,pakistanstudies,obtained,total,percentage,grade,remarks)values(:pname,:purdu,:penglish,:pmath,:pislamiat,:ppakistanstudies,:pobt,:ptotal,:pper,:pgrade,:premarks) ");
            $query->blindParam("pname",$name);
            $query->blindParam("purdu",$urdu);
            $query->blindParam("penglish",$english);
@@ -199,9 +112,9 @@ include("conection.php");
            $query->blindParam("premarks",$remarks);
            $query->execute();
            echo"<script>
-           alert('data has send successfully');
-           location.assign('viewresult.php');
-           </script>"
+           alert('data has send successfully'); 
+           </script>";
+         
         }
         ?>
 
