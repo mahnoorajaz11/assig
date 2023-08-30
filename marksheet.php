@@ -99,20 +99,21 @@ include("connection.php");
             $remarks="TRY AGAIN";
            }
            $query=$pdo->prepare("insert into data(name,urdu,english,math,islamiat,pakistanstudies,obtained,total,percentage,grade,remarks)values(:pname,:purdu,:penglish,:pmath,:pislamiat,:ppakistanstudies,:pobt,:ptotal,:pper,:pgrade,:premarks) ");
-           $query->blindParam("pname",$name);
-           $query->blindParam("purdu",$urdu);
-           $query->blindParam("penglish",$english);
-           $query->blindParam("pmath",$math);
-           $query->blindParam("pislamiat",$islamiat);
-           $query->blindParam("ppakistanstudies",$pakistanstudies);
-           $query->blindParam("pobt",$obtained);
-           $query->blindParam("ptotal",$total);
-           $query->blindParam("pper",$percentage);
-           $query->blindParam("pgrade",$grade);
-           $query->blindParam("premarks",$remarks);
+           $query->bindParam("pname",$name);
+           $query->bindParam("purdu",$urdu);
+           $query->bindParam("penglish",$english);
+           $query->bindParam("pmath",$math);
+           $query->bindParam("pislamiat",$islamiat);
+           $query->bindParam("ppakistanstudies",$pakistanstudies);
+           $query->bindParam("pobt",$obtained);
+           $query->bindParam("ptotal",$total);
+           $query->bindParam("pper",$percentage);
+           $query->bindParam("pgrade",$grade);
+           $query->bindParam("premarks",$remarks);
            $query->execute();
            echo"<script>
            alert('data has send successfully'); 
+           location.assign('viewresult.php');
            </script>";
          
         }
